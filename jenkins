@@ -3,7 +3,8 @@ pipeline
 agent any
 stages
 {
-stage('git clone')
+stage('cloning code'){
 git 'https://github.com/afridi786/maven-project.git'
+}
 }
 }
