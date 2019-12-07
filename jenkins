@@ -3,8 +3,10 @@ pipeline
 agent any
 stages
 {
-stage('cloning code'){
+stage('git scm'){
+steps{
 git 'https://github.com/afridi786/maven-project.git'
+}
 }
 }
 }
