@@ -24,6 +24,15 @@ pipeline{
 
 	}
 	}
+	stage('build code'){
+	steps{
+	withMaven(jdk: 'LOCAL_JDK', maven: 'LOCAL_MAVEN') 
+   {
+	sh 'mvn install'
+	}
+
+	}
+	}
 	}
 	
 }
