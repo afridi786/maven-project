@@ -15,12 +15,10 @@ pipeline{
 			} 
 			stage('deploy to tomcat') {
 				steps {
-					node {
 					sshagent (credentials: ['deploy-dev']) {
 					sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.41.161:/var/lib/tomcat/webapps'
 						}
-					}
 				}
 			} 
-		} 
-	}
+		}
+	} 
