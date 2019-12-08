@@ -15,7 +15,7 @@ pipeline{
 			} 
 			stage('deploy to tomcat') {
 				steps {
-					sshagent (credentials: ['deploy-dev']) {
+					sshagent(['NewTomcatForMaven']) {
    					sh 'ssh -o StrictHostKeyChecking=no */target/*.war ec2-user@3.17.60.253:/var/lib/tomcat/webapps'
 						}
 				}
