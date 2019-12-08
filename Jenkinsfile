@@ -15,6 +15,15 @@ pipeline{
 
 	}
 	}
+	stage('test code'){
+	steps{
+	withMaven(jdk: 'LOCAL_JDK', maven: 'LOCAL_MAVEN') 
+   {
+	sh 'mvn test'
+	}
+
+	}
+	}
 	}
 	
 }
