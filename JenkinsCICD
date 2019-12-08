@@ -1,0 +1,26 @@
+pipeline{
+		agent any
+		stages {
+			stage('git checkout') {
+				steps{
+					git 'https://github.com/afridi786/maven-project.git'
+				}
+			}
+			stage('build code') {
+				steps {
+					withMaven(jdk: 'LOCAL_JDK', maven: 'LOCAL_MAVEN') { 
+						sh 'mvn package'
+					}
+				}
+			} 
+			stage('deploy to tomcat') {
+				steps {
+					node {
+					sshagent (credentials: ['deploy-dev']) {
+					sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.41.161:/var/lib/tomcat/webapps'
+						}
+					}
+				}
+			} 
+		} #stages
+	} #pipeline 
