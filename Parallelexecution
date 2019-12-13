@@ -1,0 +1,28 @@
+pipeline{
+	agent any
+	stages{
+		stage("git checkout"){
+		steps{
+			 git 'https://github.com/afridi786/maven-project.git'	
+			}
+		}
+		stage('Parallel'){
+			steps{
+				parallel (
+				 "firstTask" : {
+				withMaven(jdk: 'LOCAL_JDK', maven: 'LOCAL_MAVEN') { 
+						sh 'mvn clean compile'
+			 		}
+			},
+			"secondTask" : {
+				 withMaven(jdk: 'LOCAL_JDK', maven: 'LOCAL_MAVEN') { 
+						sh 'mvn clean package'
+					}
+			}
+				)
+			}		
+		}
+	}
+}
+
+
