@@ -1,0 +1,7 @@
+---
+- hosts: amazonweb
+  tasks:
+    - name: copy html file
+      copy:
+        src=/etc/ansible/playbooks/index.html
+        dest=/var/www/html
